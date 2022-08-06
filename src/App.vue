@@ -34,10 +34,12 @@
 
     <div v-else>Идет загрузка...</div>
 
-    <my-pagination
-        v-model="page"
-        :totalPages="totalPages"
-    ></my-pagination>
+    <div ref="observer" class="observer"></div>
+
+<!--    <my-pagination-->
+<!--        v-model="page"-->
+<!--        :totalPages="totalPages"-->
+<!--    ></my-pagination>-->
   </div>
 </template>
 
@@ -101,10 +103,38 @@ export default {
         this.isPostsLoading = false;
       }
     },
+
+    async loadMorePosts() {
+      try {
+        this.page++;
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+          params: {
+            _page: this.page,
+            _limit: this.limit
+          }
+        });
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit);
+        this.posts = [...this.posts, ...response.data];
+      } catch (e) {
+        alert('Ошибка');
+      }
+    },
   },
 
   mounted() {
     this.fetchPosts();
+
+    const options = {
+      rootMargin: '0px',
+      threshold: 1.0
+    }
+    const callback = (entries, observer) => {
+      if(entries[0].isIntersecting && this.page < this.totalPages){
+        this.loadMorePosts();
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {
@@ -120,9 +150,9 @@ export default {
     }
   },
   watch: {
-    page() {
-      this.fetchPosts();
-    }
+    // page() {
+    //   this.fetchPosts();
+    // }
   }
 };
 </script>
@@ -143,6 +173,11 @@ export default {
   display: flex;
   justify-content: space-between;
 
+}
+
+.observer {
+  /*height: 30px;*/
+  /*background: green;*/
 }
 
 </style>
