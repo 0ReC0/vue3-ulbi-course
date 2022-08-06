@@ -19,6 +19,11 @@
           style="margin-left: 20px"
       >Посты с использованием Vuex
       </my-button>
+      <my-button
+          @click="$router.push('/composition')"
+          style="margin-left: 20px"
+      >Посты с использованием Composition Api
+      </my-button>
     </div>
   </div>
 </template>

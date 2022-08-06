@@ -1,9 +1,10 @@
 import Main from "@/pages/MainPage";
 import {createRouter, createWebHistory} from "vue-router/dist/vue-router";
-import PostsPage from "@/pages/PostsPage";
+import PostsPage from "@/pages/Post/PostsPage";
 import AboutPage from "@/pages/AboutPage";
-import PostPage from "@/pages/PostPage";
-import PostsPageWithStore from "@/pages/PostsPageWithStore";
+import PostPage from "@/pages/Post/PostPage";
+import PostsPageWithStore from "@/pages/Post/PostsPageWithStore";
+import PostsPageCompositionApi from "@/pages/Post/PostsPageCompositionApi";
 
 const routes = [
     {
@@ -25,6 +26,10 @@ const routes = [
     {
         path: '/store',
         component: PostsPageWithStore
+    },
+    {
+        path: '/composition',
+        component: PostsPageCompositionApi
     },
 
 ]
