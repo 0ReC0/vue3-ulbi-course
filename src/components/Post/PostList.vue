@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import PostItem from "@/components/PostItem";
+import PostItem from "@/components/Post/PostItem";
 
 export default {
   name: "PostList",
