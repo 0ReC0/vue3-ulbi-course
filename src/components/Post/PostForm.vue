@@ -9,8 +9,8 @@
     />
     <my-input
         v-model="post.body"
-        type="text" p
-        laceholder="Описание"
+        type="text"
+        placeholder="Описание"
     />
     <my-button
         style="align-self: flex-end; margin-top: 15px;"

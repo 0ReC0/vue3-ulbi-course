@@ -14,6 +14,11 @@
           style="margin-left: 20px"
       >О сайте
       </my-button>
+      <my-button
+          @click="$router.push('/store')"
+          style="margin-left: 20px"
+      >Посты с использованием Vuex
+      </my-button>
     </div>
   </div>
 </template>
